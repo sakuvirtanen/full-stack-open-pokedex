@@ -3,7 +3,8 @@ name: Hello World!
 on:
   push:
     branches:
-      - master
+    #   - master
+      - does_not_exist
 
 jobs:
   hello_world_job:
