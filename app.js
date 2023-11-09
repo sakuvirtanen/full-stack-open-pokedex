@@ -9,7 +9,9 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('Exercise 11.11 v0') // change this string to ensure a new version deployed
+  throw new Error('This should fail my pipeline')
+  // eslint-disable-next-line no-unreachable
+  res.send('Exercise 11.11 v1')
 })
 
 app.use(express.static('dist'))
