@@ -26,3 +26,15 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: Test joining commit messages
+        env:
+          JOINED_MESSAGES: ${{join(toJson(github.event.commits.*.message))}}
+        run: echo "$JOINED_MESSAGES"
+      - name: Is this the right way to join the messages?
+        env:
+          JOINED_MESSAGES_2: ${{ join(github.event.commits.*.message)}}
+        run: echo "$JOINED_MESSAGES_2"
+      - name: Recognize skip tag in any commit msg
+        env:
+          CONTAINS_SKIP_BOOL: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        run: echo "$CONTAINS_SKIP_BOOL"
