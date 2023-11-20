@@ -34,3 +34,7 @@ jobs:
         env:
           JOINED_MESSAGES_2: ${{ join(github.event.commits.*.message)}}
         run: echo "$JOINED_MESSAGES_2"
+      - name: Recognize skip tag in any commit msg
+        env:
+          CONTAINS_SKIP_BOOL: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        run: echo "$CONTAINS_SKIP_BOOL"
