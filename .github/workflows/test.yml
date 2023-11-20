@@ -30,3 +30,7 @@ jobs:
         env:
           JOINED_MESSAGES: ${{join(toJson(github.event.commits.*.message))}}
         run: echo "$JOINED_MESSAGES"
+      - name: Is this the right way to join the messages?
+        env:
+          JOINED_MESSAGES_2: ${{ join(github.event.commits.*.message)}}
+        run: echo "$JOINED_MESSAGES_2"
