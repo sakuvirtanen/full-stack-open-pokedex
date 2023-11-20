@@ -1,0 +1,40 @@
+name: Testing stuff
+
+on:
+  push:
+    branches:
+      - ex16
+      - test_pr_target
+  pull_request:
+    branches: [test_pr_target]
+    types: [opened, synchronize]
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+      - name: Test joining commit messages
+        env:
+          JOINED_MESSAGES: ${{join(toJson(github.event.commits.*.message))}}
+        run: echo "$JOINED_MESSAGES"
+      - name: Is this the right way to join the messages?
+        env:
+          JOINED_MESSAGES_2: ${{ join(github.event.commits.*.message)}}
+        run: echo "$JOINED_MESSAGES_2"
+      - name: Recognize skip tag in any commit msg
+        env:
+          CONTAINS_SKIP_BOOL: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        run: echo "$CONTAINS_SKIP_BOOL"
