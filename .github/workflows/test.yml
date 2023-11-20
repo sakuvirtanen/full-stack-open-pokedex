@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - ex16
+  pull_request:
+    branches: [test_pr_target]
+    types: [opened, synchronize]
 
 jobs:
   a_test_job:
