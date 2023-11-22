@@ -42,6 +42,7 @@ jobs:
         if: ${{success() && steps.deploy.conclusion == 'success'}}
         with:
           severity: info
+          text: Pipeline success. New version deployed
           details: Pipeline success
           webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
       - name: notify discord on failure
@@ -49,7 +50,8 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: Pipeline failed for commit ${{github.sha}}
+          text: Pipeline failure
+          details: Some steps failed for commit ${{github.sha}}
           webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
   tag_release:
     needs: [simple_deployment_pipeline]
