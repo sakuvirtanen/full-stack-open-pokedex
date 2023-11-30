@@ -12,6 +12,10 @@ app.get('/version', (req, res) => {
   res.send('Exercise 11.11 v1')
 })
 
+app.get('/brewCoffee', (req, res) => {
+  res.status(418).end()
+})
+
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {

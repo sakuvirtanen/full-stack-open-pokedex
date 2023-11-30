@@ -1,0 +1,17 @@
+name: Periodic health check
+
+
+on:
+  push:
+    branches:
+      - ex19
+
+
+jobs:
+  health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Fail check when trying to access /brewCoffee
+        uses: jtalk/rul-health-check-action@v3
+        with:
+          url: https://fso-part11.fly.dev/brewCoffee
