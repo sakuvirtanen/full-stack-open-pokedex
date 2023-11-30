@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Fail check when trying to access /brewCoffee
-        uses: jtalk/rul-health-check-action@v3
+        uses: jtalk/url-health-check-action@v3
         with:
           url: https://fso-part11.fly.dev/brewCoffee
