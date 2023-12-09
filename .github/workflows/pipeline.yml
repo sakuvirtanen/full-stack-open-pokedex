@@ -47,7 +47,7 @@ jobs:
           webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
       - name: notify discord on failure
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: ${{failure() && github.event_name == 'push'}}
         with:
           severity: error
           text: Pipeline failure
